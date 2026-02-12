@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mr. Mercado Physics Simulator - Work, Energy &amp; Power Efficiency Lab</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <h1>Mr. Mercado Physics Simulator</h1>
+      <p class="subtitle">Work, Energy &amp; Power Efficiency Lab</p>
+      <div class="instructions-title">Simulator Instructions</div>
+      <ul class="quick-steps">
+        <li>Enter the system name and upload an image.</li>
+        <li>Add input data and all outputs (mark useful vs internal energy).</li>
+        <li>Click Add Data, review the chart, and generate the PDF.</li>
+      </ul>
+    </div>
+    <div class="header-actions">
+      <img class="atom-icon" src="atom.png" alt="Physics atom icon" />
+    </div>
+    <div class="profile">
+      <img class="profile-badge" src="profile.png" alt="Christian Mercado" />
+      <div class="profile-caption">Mr. Mercado | Physics Profesor</div>
+      <a class="btn linkedin" href="https://www.linkedin.com/in/christian-j-mercado-cuevas-m-s-ed-bbb0931b6/" target="_blank" rel="noopener">
+        More physics simulators
+      </a>
+    </div>
+  </header>
+
+
+  <main class="layout">
+    <section class="panel controls">
+      <h2>System Information</h2>
+
+      <div class="control-group">
+        <label for="systemName">System name</label>
+        <input id="systemName" type="text" placeholder="e.g., Household water pump" />
+      </div>
+
+      <div class="control-group">
+        <label for="systemData">System information (150 words)</label>
+        <textarea id="systemData" rows="4" placeholder="Write a 150-word description of the system, including input data and the output you want to measure. Example: &quot;Input = 100 J. Useful output = 10 J of radiant light. Non-useful output = 90 J as heat.&quot;"></textarea>
+      </div>
+      <div class="equation-block">
+        <div class="equation-title">Efficiency equation</div>
+        <div id="equationDisplay" class="equation-text">\( \eta = \frac{\text{Useful Output}}{\text{Input}} \times 100 \)</div>
+      </div>
+
+      <div class="control-group">
+        <label for="systemImage">Upload system image</label>
+        <input id="systemImage" type="file" accept="image/*" />
+        <div class="image-preview" id="imagePreview">Preview here</div>
+      </div>
+
+      <h2>Efficiency Data</h2>
+      <div class="control-group grid-2">
+        <div>
+          <label for="inputType">Input (Energy / Work / Power)</label>
+          <select id="inputType">
+            <option value="energy">Energy</option>
+            <option value="work">Work</option>
+            <option value="power">Power</option>
+          </select>
+        </div>
+        <div>
+          <label for="inputValue">Input value</label>
+          <input id="inputValue" type="number" step="0.1" placeholder="e.g., 200" />
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>Outputs (add all outputs you want to measure)</label>
+        <div id="outputList" class="output-list"></div>
+        <button id="addOutputBtn" class="btn">Add Output</button>
+      </div>
+
+      <div class="control-group">
+        <button id="exampleBtn" class="btn">Load Example (Light Bulb)</button>
+      </div>
+
+      <div class="control-group">
+        <button id="addTrialBtn" class="btn primary">Add Data</button>
+      </div>
+
+      <div class="control-group check-area">
+        <div class="measurement-card">
+          <div class="label">Automatic efficiency</div>
+          <div class="value" id="autoEfficiency">-</div>
+        </div>
+        <div class="helper">Efficiency is calculated as: (Useful Outputs / Input) × 100. Mark outputs as Useful or Internal Energy.</div>
+      </div>
+
+      <div class="control-group">
+        <label for="conclusion">Conclusion (100 words)</label>
+        <textarea id="conclusion" rows="4" placeholder="Write a 100-word conclusion about the system's efficiency."></textarea>
+      </div>
+
+      <div class="control-group">
+        <label for="reportLabel">PDF efficiency label</label>
+        <select id="reportLabel">
+          <option value="Efficient">Efficient</option>
+          <option value="Internal">Internal</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <button id="pdfBtn" class="btn">Generate PDF</button>
+      </div>
+    </section>
+
+    <section class="panel data">
+      <h2>Data Table</h2>
+      <div class="table-actions">
+        <button id="clearTableBtn" class="btn ghost">Clear Table</button>
+        <button id="resetBtn" class="btn ghost">Reset</button>
+      </div>
+      <div class="table-wrap">
+        <table id="trialTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Input Type</th>
+              <th>Input Value</th>
+              <th>Output Types</th>
+              <th>Outputs (useful/internal)</th>
+              <th>Efficiency (%)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <h2 id="pieTitle">Input vs Output Pie Chart</h2>
+      <canvas id="ioPieChart" width="520" height="260"></canvas>
+    </section>
+  </main>
+
+  <footer class="watermark">Mr. Mercado Physics Simulator | © Christian Mercado Cuevas</footer>
+
+  <script src="app.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>
